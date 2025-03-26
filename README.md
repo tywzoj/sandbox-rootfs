@@ -8,9 +8,9 @@ This is the sandbox's rootfs used by [lyrio-judge](https://github.com/lyrio-dev/
 
 * GCC 14
 * Clang 20 (from [LLVM](https://apt.llvm.org/))
-* OpenJDK 23
+* OpenJDK 21
 * Kotlin (from [SDKMAN!](https://kotlinlang.org/docs/tutorials/command-line.html))
-* Python 3.13
+* Python 3.13 (from [PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa))
 * Swift (from [Swift.org](https://swift.org/))
 * Rust (from [Rustup](https://rustup.rs/))
 * Go (from [PPA](https://launchpad.net/~longsleep/+archive/ubuntu/golang-backports))

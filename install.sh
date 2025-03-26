@@ -2,7 +2,7 @@
 
 GCC_VERSION="14"
 LLVM_VERSION="20"
-OPENJDK_VERSION="23"
+OPENJDK_VERSION="21"
 
 UBUNTU_CODENAME="$(source /etc/os-release && echo "$UBUNTU_CODENAME")"
 UBUNTU_VERSION="$(source /etc/os-release && echo "$VERSION_ID")"
@@ -50,7 +50,7 @@ apt-get install -y g++-$GCC_VERSION-multilib \
                    libc++abi-$LLVM_VERSION-dev \
                    openjdk-$OPENJDK_VERSION-jdk \
                    python3.13 \
-                   golang-defaults
+                   golang-1.23
 
 # Install Rust via Rustup
 su sandbox -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
