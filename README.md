@@ -14,7 +14,7 @@ This is the sandbox's rootfs used by [lyrio-judge](https://github.com/lyrio-dev/
 * Kotlin (from [SDKMAN!](https://kotlinlang.org/docs/tutorials/command-line.html))
 * Python 3.13 (from [PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa))
 * Rust (from [Rustup](https://rustup.rs/))
-* Go (from [PPA](https://launchpad.net/~longsleep/+archive/ubuntu/golang-backports))
+* Go 1.23 (from [PPA](https://launchpad.net/~longsleep/+archive/ubuntu/golang-backports))
 
 Each compiler (or interpreter) is available in `$PATH`. It also contains [`testlib.h`](https://github.com/MikeMirzayanov/testlib) in `/usr/include`.
 
