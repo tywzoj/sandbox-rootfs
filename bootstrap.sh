@@ -28,12 +28,12 @@ if [[ "$ROOTFS_PATH" == "" ]]; then
 fi
 
 if [[ "$MIRROR" == "" ]]; then
-    MIRROR="http://mirrors.tuna.tsinghua.edu.cn/ubuntu"
+    MIRROR="http://archive.ubuntu.com/ubuntu/"
 fi
 
 rm -rf "$ROOTFS_PATH"
 mkdir -p "$ROOTFS_PATH"
-debootstrap --components=main,universe jammy "$ROOTFS_PATH" "$MIRROR"
+debootstrap --components=main,universe noble "$ROOTFS_PATH" "$MIRROR"
 
 cp "$INSTALL_SCRIPT" "$ROOTFS_PATH/root"
 arch-chroot "$ROOTFS_PATH" "/root/$INSTALL_SCRIPT"
