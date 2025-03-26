@@ -34,7 +34,6 @@ jobs:
         sudo chmod 777 rootfs.tar.xz
 
     - name: Upload rootfs
-      if: github.event_name != 'pull_request'
       uses: actions/upload-artifact@v4
       with:
         name: rootfs
