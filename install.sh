@@ -5,7 +5,6 @@ LLVM_VERSION="20"
 OPENJDK_VERSION="21"
 PYTHON_VERSION="3.13"
 GOLANG_VERSION="1.23"
-KOTLIN_VERSION="2.1.20"
 
 UBUNTU_CODENAME="$(source /etc/os-release && echo "$UBUNTU_CODENAME")"
 UBUNTU_VERSION="$(source /etc/os-release && echo "$VERSION_ID")"
@@ -58,10 +57,9 @@ apt-get install -y g++-$GCC_VERSION-multilib \
 # Install Rust via Rustup
 su sandbox -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
 
-# Install Kotlin
-KOTLIN_URL="https://github.com/JetBrains/kotlin/releases/download/v$KOTLIN_VERSION/kotlin-compiler-$KOTLIN_VERSION.zip"
-wget -O - "$KOTLIN_URL" | unzip -d /opt -
-mv /opt/kotlin* /opt/kotlin
+# Install Kotlin via SDKMAN!
+su sandbox -c "curl -s https://get.sdkman.io | bash"
+su sandbox -s /bin/bash -c "source ~/.sdkman/bin/sdkman-init.sh && sdk install kotlin"
 
 # Install Swift
 SWIFT_URL_QUOTED="$(curl https://www.swift.org/download/ --compressed | grep -P "\"([^\"]+ubuntu$UBUNTU_VERSION.tar.gz)\"" -o | head -n 1)"
@@ -75,8 +73,8 @@ ln -s /usr/bin/gcc-$GCC_VERSION /usr/local/bin/gcc
 ln -s /usr/bin/clang-$LLVM_VERSION /usr/local/bin/clang
 ln -s /usr/bin/clang++-$LLVM_VERSION /usr/local/bin/clang++
 ln -s /sandbox/.cargo/bin/rustc /usr/local/bin/rustc
-ln -s /opt/kotlin/bin/kotlin /usr/local/bin/kotlin
-ln -s /opt/kotlin/bin/kotlinc /usr/local/bin/kotlinc
+ln -s /sandbox/.sdkman/candidates/kotlin/current/bin/kotlin /usr/local/bin/kotlin
+ln -s /sandbox/.sdkman/candidates/kotlin/current/bin/kotlinc /usr/local/bin/kotlinc
 ln -s /opt/swift/usr/bin/swiftc /usr/local/bin/swiftc
 
 # Clean the APT cache
