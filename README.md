@@ -1,5 +1,10 @@
 # Sandbox RootFS
-This is the sandbox's rootfs used by [lyrio-judge](https://github.com/lyrio-dev/judge). It's based on Ubuntu 22.04 and contains compilers (and interpreters) below:
+
+This is a fork of [lyrio-dev/sandbox-rootfs](https://github.com/lyrio-dev/sandbox-rootfs).
+
+## Description
+
+This is the sandbox's rootfs used by [lyrio-judge](https://github.com/lyrio-dev/judge). It's based on Ubuntu 24.04 and contains compilers (and interpreters) below:
 
 * GCC 12
 * Clang 14 (from [LLVM](https://apt.llvm.org/))
@@ -20,7 +25,7 @@ Each compiler (or interpreter) is available in `$PATH`. It also contains [`testl
 
 You can download it from [release](https://github.com/lyrio-dev/sandbox-rootfs/releases) or bootstrap by yourself.
 
-# Bootstrapping
+## Bootstrapping
 You'll need:
 
 * A Linux box with root privilege
