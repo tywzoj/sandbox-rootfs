@@ -27,7 +27,7 @@ jobs:
     - name: Build
       run: |
         export ROOTFS_PATH="$(pwd)/rootfs"
-        export MIRROR="https://azure.archive.ubuntu.com/ubuntu"
+        export MIRROR="http://azure.archive.ubuntu.com/ubuntu"
         sudo --preserve-env ./bootstrap.sh
 
     - name: Compress rootfs
