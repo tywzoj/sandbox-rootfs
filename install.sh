@@ -1,9 +1,8 @@
 #!/bin/bash -e
 
-GCC_VERSION="12"
-LLVM_VERSION="14"
-OPENJDK_VERSION="17"
-GHC_VERSION="9.0.1"
+GCC_VERSION="14"
+LLVM_VERSION="20"
+OPENJDK_VERSION="23"
 
 UBUNTU_CODENAME="$(source /etc/os-release && echo "$UBUNTU_CODENAME")"
 UBUNTU_VERSION="$(source /etc/os-release && echo "$VERSION_ID")"
@@ -36,8 +35,6 @@ wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BA6932366A755776
 # Key: Go repo
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys F6BC817356A3D45E
-# Key: Haskell repo
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys FF3AEACEF6F88286
 # Key: Mono repo
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 
@@ -45,7 +42,6 @@ apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BF
 echo "deb http://apt.llvm.org/$UBUNTU_CODENAME/ llvm-toolchain-$UBUNTU_CODENAME-$LLVM_VERSION main" > /etc/apt/sources.list.d/llvm.list
 echo "deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu $UBUNTU_CODENAME main" > /etc/apt/sources.list.d/python.list
 echo "deb http://ppa.launchpad.net/longsleep/golang-backports/ubuntu $UBUNTU_CODENAME main" >  /etc/apt/sources.list.d/go.list
-echo "deb http://ppa.launchpad.net/hvr/ghc/ubuntu focal main" > /etc/apt/sources.list.d/haskell.list
 echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" > /etc/apt/sources.list.d/mono.list
 
 # Install some language support via APT
@@ -58,10 +54,8 @@ apt-get install -y g++-$GCC_VERSION-multilib \
                    openjdk-$OPENJDK_VERSION-jdk \
                    fpc \
                    python2.7 \
-                   python3.9 \
-                   python3.10 \
+                   python3.12 \
                    golang-go \
-                   ghc-$GHC_VERSION \
                    mono-devel \
                    fsharp
 
@@ -88,19 +82,9 @@ ln -s /sandbox/.sdkman/candidates/kotlin/current/bin/kotlinc /usr/local/bin/kotl
 ln -s /sandbox/.cargo/bin/rustc /usr/local/bin/rustc
 ln -s /opt/swift/usr/bin/swiftc /usr/local/bin/swiftc
 
-# Create wrapper for GHC
-cat > /usr/local/bin/ghc <<EOF
-#!/bin/bash
-for DIR in /opt/ghc/*/lib/ghc-*/*; do
-    export LD_LIBRARY_PATH="\$LD_LIBRARY_PATH:\$DIR"
-done
-/opt/ghc/bin/ghc "\$@"
-EOF
-chmod +x /usr/local/bin/ghc
-
 # Clean the APT cache
 apt-get clean
 
 # Install testlib
-git clone https://github.com/lyrio-dev/testlib /tmp/testlib
+git clone https://github.com/tywzoj/testlib.git /tmp/testlib
 cp /tmp/testlib/testlib.h /usr/include/

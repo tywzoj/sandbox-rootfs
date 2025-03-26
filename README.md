@@ -6,18 +6,16 @@ This is a fork of [lyrio-dev/sandbox-rootfs](https://github.com/lyrio-dev/sandbo
 
 This is the sandbox's rootfs used by [lyrio-judge](https://github.com/lyrio-dev/judge). It's based on Ubuntu 24.04 and contains compilers (and interpreters) below:
 
-* GCC 12
-* Clang 14 (from [LLVM](https://apt.llvm.org/))
-* OpenJDK 17
+* GCC 14
+* Clang 20 (from [LLVM](https://apt.llvm.org/))
+* OpenJDK 23
 * Kotlin (from [SDKMAN!](https://kotlinlang.org/docs/tutorials/command-line.html))
 * Free Pascal 3
 * Python 2.7
-* Python 3.9
-* Python 3.10
+* Python 3.12
 * Swift (from [Swift.org](https://swift.org/))
 * Rust (from [Rustup](https://rustup.rs/))
 * Go (from [PPA](https://launchpad.net/~longsleep/+archive/ubuntu/golang-backports))
-* GHC 9.0.1 (from [PPA](https://launchpad.net/~hvr/+archive/ubuntu/ghc))
 * C# (from [Mono](https://www.mono-project.com/download/stable/))
 * F# (from [Mono](https://www.mono-project.com/download/stable/))
 
@@ -30,12 +28,12 @@ You'll need:
 
 * A Linux box with root privilege
 * `arch-chroot` (usually in the package `arch-install-scripts`)
-* `debootstrap` (some old version of Debian's `debootstrap` couldn't bootstrap Ubuntu 22.04)
+* `debootstrap` (some old version of Debian's `debootstrap` couldn't bootstrap Ubuntu 24.04)
 
 First, clone this repo:
 
 ```bash
-git clone git@github.com:lyrio-dev/sandbox-rootfs.git
+git clone https://github.com/tywzoj/sandbox-rootfs.git
 cd sandbox-rootfs
 ```
 
