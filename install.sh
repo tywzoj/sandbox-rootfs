@@ -41,7 +41,7 @@ Architectures: amd64 arm64
 Signed-By: /etc/apt/trusted.gpg.d/apt.llvm.org.asc
 URIs: https://apt.llvm.org/$UBUNTU_CODENAME/
 Suites: llvm-toolchain-$UBUNTU_CODENAME-$LLVM_VERSION
-Components: main" > /etc/apt/sources.list.d/llvm.list
+Components: main" > /etc/apt/sources.list.d/llvm.sources
 # Python3
 add-apt-repository ppa:deadsnakes/ppa
 # Golang
