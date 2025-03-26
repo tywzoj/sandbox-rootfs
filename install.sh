@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 GCC_VERSION="14"
-LLVM_VERSION="20"
+LLVM_VERSION="19"
 OPENJDK_VERSION="21"
 PYTHON_VERSION="3.13"
 GOLANG_VERSION="1.23"
@@ -30,35 +30,35 @@ sed "s/$UBUNTU_CODENAME/$UBUNTU_CODENAME-updates/" <<< "$ORIGINAL_SOURCE" >> /et
 echo "Installing dependencies..."
 apt-get update
 apt-get dist-upgrade -y
-apt-get install -y gnupg ca-certificates curl wget locales unzip zip git
+apt-get install -y gnupg ca-certificates curl wget locales unzip zip git software-properties-common
 echo "Dependencies installed."
 
 echo "Adding repositories..."
-# Key: LLVM repo
-wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-# Key: Python3 repo
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys F23C5A6CF475977595C89F51BA6932366A755776
-# Key: Go repo
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 876B22BA887CA91614B5323FC631127F87FA12D1
-
-# Add sources
-echo "deb https://apt.llvm.org/$UBUNTU_CODENAME/ llvm-toolchain-$UBUNTU_CODENAME-$LLVM_VERSION main" > /etc/apt/sources.list.d/llvm.list
-echo "deb https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu $UBUNTU_CODENAME main" > /etc/apt/sources.list.d/python.list
-echo "deb https://ppa.launchpadcontent.net/longsleep/golang-backports/ubuntu $UBUNTU_CODENAME main" >  /etc/apt/sources.list.d/go.list
-
+# LLVM
+wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+echo "Types: deb
+Architectures: amd64 arm64
+Signed-By: /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+URIs: https://apt.llvm.org/$UBUNTU_CODENAME/
+Suites: llvm-toolchain-$UBUNTU_CODENAME-$LLVM_VERSION
+Components: main" > /etc/apt/sources.list.d/llvm.sources
+# Python3
+add-apt-repository ppa:deadsnakes/ppa
+# Golang
+add-apt-repository ppa:longsleep/golang-backports
 apt-get update
 echo "Repositories added."
 
 # Install some language support via APT
 echo "Installing GCC, LLVM, OpenJDK, Python, and Go..."
 apt-get install -y g++-$GCC_VERSION-multilib \
-                   gcc-$GCC_VERSION-multilib \
-                   clang-$LLVM_VERSION \
-                   libc++-$LLVM_VERSION-dev \
-                   libc++abi-$LLVM_VERSION-dev \
-                   openjdk-$OPENJDK_VERSION-jdk \
-                   python$PYTHON_VERSION \
-                   golang-$GOLANG_VERSION-go 
+               gcc-$GCC_VERSION-multilib \
+               clang-$LLVM_VERSION \
+               libc++-$LLVM_VERSION-dev \
+               libc++abi-$LLVM_VERSION-dev \
+               openjdk-$OPENJDK_VERSION-jdk \
+               python$PYTHON_VERSION \
+               golang-$GOLANG_VERSION-go
 echo "GCC, LLVM, OpenJDK, Python, and Go installed."
 
 # Install Rust via Rustup
