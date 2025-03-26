@@ -28,9 +28,9 @@ sed "s/$UBUNTU_CODENAME/$UBUNTU_CODENAME-updates/" <<< "$ORIGINAL_SOURCE" >> /et
 
 # Install dependencies
 echo "Installing dependencies..."
-apt update
-apt dist-upgrade -y
-apt install -y gnupg ca-certificates curl wget locales unzip zip git software-properties-common
+apt-get update
+apt-get dist-upgrade -y
+apt-get install -y gnupg ca-certificates curl wget locales unzip zip git software-properties-common
 echo "Dependencies installed."
 
 echo "Adding repositories..."
@@ -46,12 +46,12 @@ Components: main" > /etc/apt/sources.list.d/llvm.sources
 add-apt-repository ppa:deadsnakes/ppa
 # Golang
 add-apt-repository ppa:longsleep/golang-backports
-apt update
+apt-get update
 echo "Repositories added."
 
 # Install some language support via APT
 echo "Installing GCC, LLVM, OpenJDK, Python, and Go..."
-apt install -y g++-$GCC_VERSION-multilib \
+apt-get install -y g++-$GCC_VERSION-multilib \
                gcc-$GCC_VERSION-multilib \
                clang-$LLVM_VERSION \
                libc++-$LLVM_VERSION-dev \
@@ -92,4 +92,4 @@ cp /tmp/testlib/testlib.h /usr/include/
 echo "Testlib installed."
 
 # Clean the APT cache
-apt clean
+apt-get clean
