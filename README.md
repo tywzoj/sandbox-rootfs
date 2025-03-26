@@ -9,7 +9,7 @@ Thanks to [lyrio-dev](https://github.com/lyrio-dev) and [Menci](https://github.c
 This is the sandbox's rootfs used by [lyrio-judge](https://github.com/lyrio-dev/judge). It's based on Ubuntu 24.04 and contains compilers (and interpreters) below:
 
 * GCC 14
-* Clang 20 (from [LLVM](https://apt.llvm.org/))
+* Clang 19 (from [LLVM](https://apt.llvm.org/))
 * OpenJDK 21
 * Kotlin (from [SDKMAN!](https://kotlinlang.org/docs/tutorials/command-line.html))
 * Python 3.13 (from [PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa))
