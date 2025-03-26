@@ -1,20 +1,18 @@
-name: Build
+name: Validate
 
 on:
-  push:
+  pull_request:
     branches: [main]
-  workflow_dispatch:
 
 env:
   TZ: Asia/Shanghai
 
 concurrency:
-  group: main-build
+  group: pr-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
-  build_deploy:
-    name: Build
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -30,13 +28,8 @@ jobs:
         export MIRROR="https://azure.archive.ubuntu.com/ubuntu"
         sudo --preserve-env ./bootstrap.sh
 
-    - name: Compress rootfs
-      run: |
-        sudo tar -cJvf rootfs.tar.xz rootfs
-        sudo chmod 777 rootfs.tar.xz
-
     - name: Upload rootfs
       uses: actions/upload-artifact@v4
       with:
         name: rootfs
-        path: rootfs.tar.xz
+        path: rootfs
