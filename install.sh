@@ -31,18 +31,15 @@ apt-get install -y gnupg ca-certificates curl wget locales unzip zip git
 
 # Key: LLVM repo
 wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-# Key: Python repo
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BA6932366A755776
+# Key: Python3 repo
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys F23C5A6CF475977595C89F51BA6932366A755776
 # Key: Go repo
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys F6BC817356A3D45E
-# Key: Mono repo
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 876B22BA887CA91614B5323FC631127F87FA12D1
 
 # Add sources
-echo "deb http://apt.llvm.org/$UBUNTU_CODENAME/ llvm-toolchain-$UBUNTU_CODENAME-$LLVM_VERSION main" > /etc/apt/sources.list.d/llvm.list
-echo "deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu $UBUNTU_CODENAME main" > /etc/apt/sources.list.d/python.list
-echo "deb http://ppa.launchpad.net/longsleep/golang-backports/ubuntu $UBUNTU_CODENAME main" >  /etc/apt/sources.list.d/go.list
-echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" > /etc/apt/sources.list.d/mono.list
+echo "deb https://apt.llvm.org/$UBUNTU_CODENAME/ llvm-toolchain-$UBUNTU_CODENAME-$LLVM_VERSION main" > /etc/apt/sources.list.d/llvm.list
+echo "deb https://ppa.launchpadcontent.net/deadsnakes/ppa/ubuntu $UBUNTU_CODENAME main" > /etc/apt/sources.list.d/python.list
+echo "deb https://ppa.launchpadcontent.net/longsleep/golang-backports/ubuntu $UBUNTU_CODENAME main" >  /etc/apt/sources.list.d/go.list
 
 # Install some language support via APT
 apt-get update
@@ -52,12 +49,8 @@ apt-get install -y g++-$GCC_VERSION-multilib \
                    libc++-$LLVM_VERSION-dev \
                    libc++abi-$LLVM_VERSION-dev \
                    openjdk-$OPENJDK_VERSION-jdk \
-                   fpc \
-                   python2.7 \
-                   python3.12 \
-                   golang-go \
-                   mono-devel \
-                   fsharp
+                   python3.13 \
+                   golang-defaults
 
 # Install Rust via Rustup
 su sandbox -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
