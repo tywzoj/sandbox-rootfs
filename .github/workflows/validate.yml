@@ -28,6 +28,11 @@ jobs:
         export MIRROR="http://azure.archive.ubuntu.com/ubuntu"
         sudo --preserve-env ./bootstrap.sh
 
+    - name: Set permissions
+      run: |
+        sudo chown -R $USER:$USER rootfs
+        sudo chmod -R 444 rootfs
+
     - name: Upload rootfs
       uses: actions/upload-artifact@v4
       with:
