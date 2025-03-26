@@ -10,14 +10,10 @@ This is the sandbox's rootfs used by [lyrio-judge](https://github.com/lyrio-dev/
 * Clang 20 (from [LLVM](https://apt.llvm.org/))
 * OpenJDK 23
 * Kotlin (from [SDKMAN!](https://kotlinlang.org/docs/tutorials/command-line.html))
-* Free Pascal 3
-* Python 2.7
-* Python 3.12
+* Python 3.13
 * Swift (from [Swift.org](https://swift.org/))
 * Rust (from [Rustup](https://rustup.rs/))
 * Go (from [PPA](https://launchpad.net/~longsleep/+archive/ubuntu/golang-backports))
-* C# (from [Mono](https://www.mono-project.com/download/stable/))
-* F# (from [Mono](https://www.mono-project.com/download/stable/))
 
 Each compiler (or interpreter) is available in `$PATH`. It also contains [`testlib.h`](https://github.com/MikeMirzayanov/testlib) in `/usr/include`.
 
