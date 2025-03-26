@@ -61,12 +61,6 @@ su sandbox -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s
 su sandbox -c "curl -s https://get.sdkman.io | bash"
 su sandbox -s /bin/bash -c "source ~/.sdkman/bin/sdkman-init.sh && sdk install kotlin"
 
-# Install Swift
-SWIFT_URL_QUOTED="$(curl https://www.swift.org/download/ --compressed | grep -P "\"([^\"]+ubuntu$UBUNTU_VERSION.tar.gz)\"" -o | head -n 1)"
-SWIFT_URL="$(eval "echo $SWIFT_URL_QUOTED")"
-wget -O - "$SWIFT_URL" | tar -xzf - -C /opt
-mv /opt/swift* /opt/swift
-
 # Create symlinks for compilers and interpreters with non-common names and locations
 ln -s /usr/bin/g++-$GCC_VERSION /usr/local/bin/g++
 ln -s /usr/bin/gcc-$GCC_VERSION /usr/local/bin/gcc
@@ -75,7 +69,6 @@ ln -s /usr/bin/clang++-$LLVM_VERSION /usr/local/bin/clang++
 ln -s /sandbox/.cargo/bin/rustc /usr/local/bin/rustc
 ln -s /sandbox/.sdkman/candidates/kotlin/current/bin/kotlin /usr/local/bin/kotlin
 ln -s /sandbox/.sdkman/candidates/kotlin/current/bin/kotlinc /usr/local/bin/kotlinc
-ln -s /opt/swift/usr/bin/swiftc /usr/local/bin/swiftc
 
 # Clean the APT cache
 apt-get clean
