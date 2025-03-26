@@ -18,7 +18,7 @@ This is the sandbox's rootfs used by [lyrio-judge](https://github.com/lyrio-dev/
 
 Each compiler (or interpreter) is available in `$PATH`. It also contains [`testlib.h`](https://github.com/MikeMirzayanov/testlib) in `/usr/include`.
 
-You can download it from [release](https://github.com/lyrio-dev/sandbox-rootfs/releases) or bootstrap by yourself.
+You can download it from [release](https://github.com/tywzoj/sandbox-rootfs/releases) or bootstrap by yourself.
 
 ## Bootstrapping
 You'll need:
